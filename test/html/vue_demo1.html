@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue实例1</title>
+	<!-- 引入vue.js -->
+	<script src="../vue.js"></script>
+</head>
+<body>
+
+     <!--  差值表达式 -->
+	 <!-- 
+	<div id="root">{{msg}}</div>
+	<script>
+		//实例化Vue对象
+		new Vue({
+			 // 挂载点(用来绑定与元素的)
+			el: '#root',
+			// 数据对象(自定义数据对象)
+			data:{
+				
+				msg:'hello world'
+			}
+		})
+
+	</script> -->
+
+	<!-- 模板加差值方式 -->
+	<!--<div id="root"></div>
+	<script>
+		//实例化Vue对象
+		new Vue({
+			 // 挂载点(用来绑定与元素的)
+			el: '#root',
+			//模板
+			template:'<h1>你好{{msg}}</h1>',
+			// 数据对象(自定义数据对象)
+			data:{
+				msg:'vue',
+			}
+		})
+	</script>-->
+
+	<!-- v-html与v-text的区别 -->
+	<!--<div id="root">
+		<p v-text="name">用了v-text,这里的东西不会显示的</p> 
+		<span>上面用的v-text是不会解析html标签的</span>
+		<p v-html="name">用了v-html,这里的东西不会显示的</p>
+		<span>上面用的v-html是会解析html标签的</span>
+
+	</div>
+	<script>
+		//实例化Vue对象
+		new Vue({
+			 // 挂载点(用来绑定与元素的)
+			el: '#root',
+			// 数据对象(自定义数据对象)
+			data:{
+				msg:'vue',
+				name:'<h1>mclink</h1>',
+			}
+		})
+
+	</script>-->
+
+
+    <!-- 监听事件的方法 -->
+     <!-- v-on可以写成@ -->
+	<!--<div id="root"> 
+	  <div  v-on:click="change">{{msg}}</div>
+	  <div  @click="change">{{msg}}</div>
+	</div>
+	<script>
+		//实例化Vue对象
+		new Vue({
+			 // 挂载点(用来绑定与元素的)
+			el: '#root',
+			// 数据对象(自定义数据对象)
+			data:{
+				msg:'vue',
+				name:'<h1>mclink</h1>',
+			},
+			//方法实现
+           methods:{
+           	change:function(){
+           		this.msg='i love vue'
+           	}
+           }
+		})
+	</script>-->
+
+	<!-- 属性绑定和双向数据绑定 -->
+	<!-- ：和v-bind的效果是一样的，是一种简写方式 -->
+	<!--<div id="root">
+		<div v-bind:title="title">mclink</div>
+		<div :title="title">mclink</div>
+		<input :value="content"/><p>这是没有双向绑定的,修改值data不会变</p>
+		<input v-model="content"/><p>这是进行了双向绑定的,修改同时改变data</p>
+		<div>{{content}}</div>
+	</div>
+	<script>
+		new Vue({
+			el:"#root",
+			data:{
+
+				title:"这是一个提醒",
+				content:"这是content",
+			},
+		})
+	</script>-->
+
+
+	<!-- 计算属性computed和侦听器wantch -->
+	<!--<div id="root">
+		姓:<input v-model="firstname" />
+		名:<input v-model="lastname"/>
+		<div>
+			全名:<input v-model="fullname"/>
+		</div>
+		<div>
+			{{count}}
+		</div>
+		
+	</div>
+	<script>
+		new Vue({
+
+			el:"#root",
+			data:{
+				firstname:"",
+				lastname:"",
+				count:0,
+			},
+			computed:{
+				fullname:function()
+				{
+					return this.firstname+' '+this.lastname
+				}
+			},
+			//监听器
+			watch:{
+			   fullname:function()
+			   {
+			   	this.count++
+			   },
+
+			},
+		})
+	</script>-->
+
+	<!-- v-if,v-show,v-for的学习使用 -->
+	<!-- V-if="a" 当a为假时,会移除该dom -->
+	<!-- V-show="a" 当a为假时,不会会移除该dom,只会加上display：none; -->
+	<!-- v-for,循环输出标签 -->
+	<!--<div id="root">
+		<div v-if="show1">{{one}}</div>
+		<button @click="show_button1">v-if</button>
+		<div v-show="show2">{{two}}</div>
+		<button @click="show_button2">v-show</button>
+		<ul>
+          <li v-for="item of list">{{item}}</li>
+          <br/>
+          <span style="display: none">加上key可以增加效率，Key要求每项的值都是不同的
+          </span>
+          <li v-for="(item,index) of list" :key="index">{{item}}</li>
+        </ul>
+	</div>
+	<script>
+		new Vue({
+			el:"#root",
+			data:{
+				one:"one",
+				two:"two",
+				show1:"true", 
+				show2:"true",
+				list:[1,2,3],
+			},
+			methods:{
+				show_button1:function(){
+					this.show1=!this.show1
+				},
+				show_button2:function()
+				{
+					this.show2=!this.show2
+				}
+			}
+
+		})
+	</script>-->
+
+	<!-- 创建一个todolist -->
+	<!--<div id="root">
+		<div>
+			<input v-model="value"/>
+			<button @click="add">submit</button>
+			<ul>
+				<li v-for="(item,index) of list" :key="index">{{item}}</li>
+			</ul>
+		</div>
+	</div>
+	<script>
+	    new Vue({
+
+	    	el:"#root",
+	    	data:{
+	    		value:"",
+	    		list:[]
+	    	},
+	    	methods:{
+	    		add:function()
+	    		{
+	    			this.list.push(this.value),
+	    			this.value=""
+	    		}
+	    	}
+	    })
+	</script>-->
+
+	<!-- 组件的创建注册以及传值(重点内容)-->
+	<!-- 组件指的是页面的某一部分 -->
+	<!-- 定义一个全局组件的方式 
+		<div id="example">
+			  <my-component></my-component>
+		</div>
+			// 注册
+			Vue.component('my-component', {
+			  template: '<div>A custom component!</div>'
+			})
+
+			// 创建根实例
+			new Vue({
+			  el: '#example'
+			})
+        //则会渲染成
+        <div id="example">
+			  <div>A custom component!</div>
+		</div>
+	-->
+	<!-- 定义一个局部组件的方式
+		//对象形式
+		var Child = {
+			  template: '<div>A custom component!</div>'
+			}
+
+			new Vue({
+			 el: '#example',
+			  components: {
+			    // <my-component> 将只在父组件模板中可用
+			    'my-component': Child
+			  }
+			})
+
+	 -->
+	<!--
+	<div id="root">
+			<first></first>
+	</div>
+	<div id="aoot">
+		<second></second>
+	</div>
+	<script>
+		//局部方式
+		var one={
+			template:"<h1>I love Vue</h1>"
+		}
+	    new Vue({
+
+	    	el:"#root",
+	    	components:{
+	    		// <first> 将只在父组件模板中可用
+	    		'first':one
+	    	},
+	     })
+	    //全局方式
+	    Vue.component('second',{
+	    	template:"<h1>I love PHP</h1>",
+	    })
+
+	    new Vue({
+	    	el:"#aoot"
+	    })
+	</script>
+   -->
+    
+   <!-- 组件的创建以及传值 -->
+   <!--
+   <div id="root">
+		<div>
+			<input v-model="value"/>
+			<button @click="add">submit</button>
+			<div>
+			  <ul>
+			  	<my-first 
+			  	v-for="(item,index) of list" :key="index" :content="item"
+			  	>
+				{{item}}
+				</my-first>
+			  </ul>
+			</div>
+		</div>
+	</div>
+	<script>
+		//使用局部注册的方式,props是传值
+		var test={
+			props:['content'],
+			template:"<li>{{content}}</li>"
+		}
+	    new Vue({
+
+	    	el:"#root",
+	    	components:{
+
+	    		'my-first':test
+
+	    	},
+	    	data:{
+	    		value:"",
+	    		list:[]
+	    	},
+	    	methods:{
+	    		add:function()
+	    		{
+	    			this.list.push(this.value),
+	    			this.value=""
+	    		}
+	    	}
+	    })
+	</script>-->
+
+	<!-- 在上面的基础上添加点击删除功能，父子组件的通讯 -->
+	<!-- 父子组件的通讯是基于属性绑定的 -->
+	<div id="root">
+		<div>
+			<input v-model="value"/>
+			<button @click="add">submit</button>
+			<div>
+			  <ul>
+			  	<my-first 
+			  	v-for="(item,index) of list" :key="index" :content="item"
+			  	:index="index"  @delete="ondelete"
+			  	>
+				{{item}}
+				</my-first>
+			  </ul>
+			</div>
+		</div>
+	</div>
+	<script>
+		//使用局部注册的方式,props是传值
+		var test={
+			props:['content','index'],
+			template:"<li @click='tough'>{{content}}</li>",
+			methods:{
+				tough:function(){
+					//子组件向父组件传递消息
+					this.$emit('delete',this.index)
+					
+				}
+			}
+		}
+	    new Vue({
+
+	    	el:"#root",
+	    	components:{
+
+	    		'my-first':test
+
+	    	},
+	    	data:{
+	    		value:"",
+	    		list:[]
+	    	},
+	    	methods:{
+	    		add:function()
+	    		{
+	    			this.list.push(this.value),
+	    			this.value=""
+	    		},
+	    	 ondelete:function(index)
+	    		{
+
+	    			this.list.splice(index)
+	    		}
+	    	}
+	    })
+	</script>
+
+</body>
+</html>
